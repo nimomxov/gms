@@ -93,15 +93,3 @@ Missing: heading   -> path reconstruction, orientation DISABLED
 Always  disabled   -> depth estimation (needs calibrated inversion)
 
 Disabled features show an explanatory message, never fake values.
-
----
-
-## CLI Reference
-
-python main.py --scans scan_A.csv scan_B.csv       # auto-detect + run
-python main.py --introspect scan_A.csv             # field mapping report
-python main.py --scans *.csv --preset rbf          # specific preset
-python main.py --compare --scans *.csv             # compare all presets
-python main.py --demo                              # run synthetic demo
-python main.py --list-presets                      # show presets
-python main.py --server                            # launch FastAPI
