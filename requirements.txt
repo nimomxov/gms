@@ -1,0 +1,11 @@
+numpy>=1.24
+scipy>=1.11
+pandas>=2.0
+matplotlib>=3.7
+pyyaml>=6.0
+fastapi>=0.110
+uvicorn>=0.27
+python-multipart>=0.0.9
+plotly>=5.18
+pyqtgraph
+pyopengl

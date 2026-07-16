@@ -1,0 +1,22 @@
+# Generic CSV Device Profile
+name: generic_csv
+description: >
+  Generic fallback for CSV files with x, y, value columns.
+  Minimal capability set: position + signal only.
+
+auto_detect_fields:
+  - x
+  - y
+  - value
+
+field_aliases:
+  value: signal
+
+scaling:
+  signal: 1.0
+
+value_range: [0, 1024]
+telemetry_notes: >
+  Standard x/y/value format. No SNR, heading, or baseline.
+  Confidence analysis disabled. 2D heatmap available.
+recommended_preset: stable

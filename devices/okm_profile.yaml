@@ -1,0 +1,27 @@
+# OKM-compatible Device Profile
+name: okm_profile
+description: >
+  OKM-style gradiometer CSV export. Provides position, gradient value,
+  and optional noise field. No heading or stability telemetry.
+
+auto_detect_fields:
+  - grad
+  - xpos
+  - ypos
+
+field_aliases:
+  grad:      signal
+  xpos:      x
+  ypos:      y
+  emi:       noise_floor
+  filtered:  filtered_signal
+
+scaling:
+  signal: 1.0
+
+value_range: [-2000, 2000]
+telemetry_notes: >
+  OKM export uses signed gradient values (nT or ADC).
+  No heading or stability fields. SNR unavailable.
+  Confidence analysis will be disabled.
+recommended_preset: stable

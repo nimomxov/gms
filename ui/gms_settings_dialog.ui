@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SettingsDialog</class>
+ <widget class="QDialog" name="SettingsDialog">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>620</width><height>560</height></rect>
+  </property>
+  <property name="windowTitle"><string>GMS — Settings</string></property>
+  <property name="styleSheet">
+   <string notr="true">
+QDialog { background: #1E1E1E; color: #EAEAEA; }
+QLabel { color: #CCCCCC; font-size: 11px; }
+QLineEdit, QSpinBox, QDoubleSpinBox, QComboBox {
+    background: #1A1A1A; color: #EAEAEA;
+    border: 1px solid #3A3A3C; border-radius: 3px; padding: 4px 8px; font-size: 11px;
+}
+QLineEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus, QComboBox:focus {
+    border-color: #3A86FF;
+}
+QComboBox::drop-down { border: none; }
+QComboBox QAbstractItemView { background: #2D2D30; color: #EAEAEA; border: 1px solid #3A3A3C; }
+QGroupBox {
+    color: #777777; font-size: 11px;
+    border: 1px solid #3A3A3C; border-radius: 5px;
+    margin-top: 10px; padding-top: 4px;
+}
+QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 4px; }
+QPushButton {
+    background: #2D2D30; color: #CCCCCC;
+    border: 1px solid #3A3A3C; border-radius: 4px;
+    padding: 6px 16px; font-size: 11px; min-height: 28px;
+}
+QPushButton:hover { background: #3A86FF; color: #FFF; border-color: #3A86FF; }
+QPushButton:pressed { background: #2266CC; }
+QCheckBox { color: #CCCCCC; font-size: 11px; spacing: 6px; }
+QCheckBox::indicator { width: 14px; height: 14px; border: 1px solid #555555; border-radius: 3px; background: #1A1A1A; }
+QCheckBox::indicator:checked { background: #3A86FF; border-color: #3A86FF; }
+QListWidget {
+    background: #1A1A1A; color: #EAEAEA;
+    border: 1px solid #3A3A3C; border-radius: 4px; font-size: 11px;
+}
+QListWidget::item { padding: 8px 12px; border-bottom: 1px solid #2A2A2A; }
+QListWidget::item:selected { background: #1A2744; color: #3A86FF; font-weight: bold; }
+QStackedWidget { background: #1E1E1E; }
+   </string>
+  </property>
+
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="contentsMargins"><rect><x>0</x><y>0</y><width>0</width><height>0</height></rect></property>
+   <property name="spacing"><number>0</number></property>
+
+   <!-- Main body splitter -->
+   <item>
+    <widget class="QSplitter" name="settingsSplitter">
+     <property name="orientation"><enum>Qt::Horizontal</enum></property>
+     <property name="handleWidth"><number>1</number></property>
+     <property name="styleSheet"><string notr="true">QSplitter::handle{background:#3A3A3C;}</string></property>
+
+     <!-- Left nav list -->
+     <widget class="QListWidget" name="settingsNav">
+      <property name="maximumWidth"><number>170</number></property>
+      <property name="minimumWidth"><number>150</number></property>
+      <property name="styleSheet">
+       <string notr="true">
+QListWidget{background:#252526;border:none;border-right:1px solid #3A3A3C;padding-top:8px;}
+QListWidget::item{padding:10px 16px;border:none;color:#888888;font-size:11px;}
+QListWidget::item:selected{background:#1E1E1E;color:#3A86FF;border-left:3px solid #3A86FF;font-weight:bold;}
+QListWidget::item:hover:!selected{background:#2D2D30;color:#CCCCCC;}
+       </string>
+      </property>
+      <item><property name="text"><string>General</string></property></item>
+      <item><property name="text"><string>Appearance</string></property></item>
+      <item><property name="text"><string>Pipeline</string></property></item>
+      <item><property name="text"><string>Visualization</string></property></item>
+      <item><property name="text"><string>Performance</string></property></item>
+      <item><property name="text"><string>Paths &amp; Export</string></property></item>
+      <item><property name="text"><string>Advanced</string></property></item>
+     </widget>
+
+     <!-- Right content stack -->
+     <widget class="QStackedWidget" name="settingsStack">
+
+      <!-- PAGE 0: General -->
+      <widget class="QWidget" name="pageGeneral">
+       <layout class="QVBoxLayout">
+        <property name="contentsMargins"><rect><x>20</x><y>16</y><width>20</width><height>16</height></rect></property>
+        <property name="spacing"><number>14</number></property>
+        <item><widget class="QLabel" name="lblGeneralTitle"><property name="text"><string>General</string></property><property name="styleSheet"><string notr="true">font-size:16px;font-weight:bold;color:#EAEAEA;padding-bottom:4px;</string></property></widget></item>
+        <item>
+         <widget class="QGroupBox" name="groupStartup">
+          <property name="title"><string>Startup</string></property>
+          <layout class="QVBoxLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item><widget class="QCheckBox" name="checkRestoreLayout"><property name="text"><string>Restore last workspace layout on startup</string></property><property name="checked"><bool>true</bool></property></widget></item>
+           <item><widget class="QCheckBox" name="checkReopenProject"><property name="text"><string>Reopen last project on startup</string></property><property name="checked"><bool>false</bool></property></widget></item>
+           <item><widget class="QCheckBox" name="checkCheckUpdates"><property name="text"><string>Check for updates on startup</string></property><property name="checked"><bool>true</bool></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupLanguage">
+          <property name="title"><string>Language &amp; Region</string></property>
+          <layout class="QFormLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblLang"><property name="text"><string>Language:</string></property></widget></item>
+           <item row="0" column="1"><widget class="QComboBox" name="comboLanguage"><item><property name="text"><string>English</string></property></item><item><property name="text"><string>Arabic</string></property></item><item><property name="text"><string>French</string></property></item></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="lblCoordUnit"><property name="text"><string>Coordinate Unit:</string></property></widget></item>
+           <item row="1" column="1"><widget class="QComboBox" name="comboCoordUnit"><item><property name="text"><string>Metres</string></property></item><item><property name="text"><string>Feet</string></property></item></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer></item>
+       </layout>
+      </widget>
+
+      <!-- PAGE 1: Appearance -->
+      <widget class="QWidget" name="pageAppearance">
+       <layout class="QVBoxLayout">
+        <property name="contentsMargins"><rect><x>20</x><y>16</y><width>20</width><height>16</height></rect></property>
+        <property name="spacing"><number>14</number></property>
+        <item><widget class="QLabel" name="lblAppearTitle"><property name="text"><string>Appearance</string></property><property name="styleSheet"><string notr="true">font-size:16px;font-weight:bold;color:#EAEAEA;padding-bottom:4px;</string></property></widget></item>
+        <item>
+         <widget class="QGroupBox" name="groupTheme">
+          <property name="title"><string>Theme</string></property>
+          <layout class="QFormLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblTheme"><property name="text"><string>UI Theme:</string></property></widget></item>
+           <item row="0" column="1"><widget class="QComboBox" name="comboTheme"><item><property name="text"><string>GMS Dark (default)</string></property></item><item><property name="text"><string>Dark Blue</string></property></item><item><property name="text"><string>High Contrast</string></property></item></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="lblFont"><property name="text"><string>UI Font:</string></property></widget></item>
+           <item row="1" column="1"><widget class="QComboBox" name="comboUIFont"><item><property name="text"><string>Segoe UI</string></property></item><item><property name="text"><string>Inter</string></property></item><item><property name="text"><string>Roboto</string></property></item><item><property name="text"><string>Noto Sans</string></property></item></widget></item>
+           <item row="2" column="0"><widget class="QLabel" name="lblFontSize"><property name="text"><string>Font Size:</string></property></widget></item>
+           <item row="2" column="1"><widget class="QSpinBox" name="spinFontSize"><property name="minimum"><number>9</number></property><property name="maximum"><number>16</number></property><property name="value"><number>11</number></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupHeatmapDefaults">
+          <property name="title"><string>Heatmap Defaults</string></property>
+          <layout class="QFormLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblDefColormap"><property name="text"><string>Default Colormap:</string></property></widget></item>
+           <item row="0" column="1"><widget class="QComboBox" name="comboDefColormap"><item><property name="text"><string>RdYlBu_r</string></property></item><item><property name="text"><string>viridis</string></property></item><item><property name="text"><string>inferno</string></property></item><item><property name="text"><string>turbo</string></property></item></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="lblDefDPI"><property name="text"><string>Export DPI:</string></property></widget></item>
+           <item row="1" column="1"><widget class="QSpinBox" name="spinExportDPI"><property name="minimum"><number>72</number></property><property name="maximum"><number>600</number></property><property name="value"><number>150</number></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer></item>
+       </layout>
+      </widget>
+
+      <!-- PAGE 2: Pipeline -->
+      <widget class="QWidget" name="pagePipeline">
+       <layout class="QVBoxLayout">
+        <property name="contentsMargins"><rect><x>20</x><y>16</y><width>20</width><height>16</height></rect></property>
+        <property name="spacing"><number>14</number></property>
+        <item><widget class="QLabel" name="lblPipeTitle"><property name="text"><string>Pipeline Defaults</string></property><property name="styleSheet"><string notr="true">font-size:16px;font-weight:bold;color:#EAEAEA;padding-bottom:4px;</string></property></widget></item>
+        <item>
+         <widget class="QGroupBox" name="groupPipelineDefaults">
+          <property name="title"><string>Default Preset</string></property>
+          <layout class="QFormLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblDefPreset"><property name="text"><string>Default Preset:</string></property></widget></item>
+           <item row="0" column="1"><widget class="QComboBox" name="comboDefPreset"><item><property name="text"><string>stable (production)</string></property></item><item><property name="text"><string>sensitive</string></property></item><item><property name="text"><string>rbf (experimental)</string></property></item></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="lblDefInterp"><property name="text"><string>Default Interpolator:</string></property></widget></item>
+           <item row="1" column="1"><widget class="QComboBox" name="comboDefInterp"><item><property name="text"><string>cubic</string></property></item><item><property name="text"><string>linear</string></property></item></widget></item>
+           <item row="2" column="0"><widget class="QLabel" name="lblDefBaseline"><property name="text"><string>Default Baseline:</string></property></widget></item>
+           <item row="2" column="1"><widget class="QComboBox" name="comboDefBaseline"><item><property name="text"><string>wavelet_adaptive</string></property></item><item><property name="text"><string>line_median</string></property></item><item><property name="text"><string>adaptive_local</string></property></item></widget></item>
+           <item row="3" column="0"><widget class="QLabel" name="lblDefDetector"><property name="text"><string>Default Detector:</string></property></widget></item>
+           <item row="3" column="1"><widget class="QComboBox" name="comboDefDetector"><item><property name="text"><string>hybrid</string></property></item><item><property name="text"><string>log</string></property></item><item><property name="text"><string>matched_cascade</string></property></item></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupPipelineSafety">
+          <property name="title"><string>Safety Rules</string></property>
+          <layout class="QVBoxLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item><widget class="QCheckBox" name="checkNeverFakeDepth"><property name="text"><string>Never display depth without calibration (always ON)</string></property><property name="checked"><bool>true</bool></property><property name="enabled"><bool>false</bool></property></widget></item>
+           <item><widget class="QCheckBox" name="checkNeverFakeConf"><property name="text"><string>Never display confidence without SNR (always ON)</string></property><property name="checked"><bool>true</bool></property><property name="enabled"><bool>false</bool></property></widget></item>
+           <item><widget class="QCheckBox" name="checkEstimatedLabel"><property name="text"><string>Always show ESTIMATED POSITION ONLY on dig markers</string></property><property name="checked"><bool>true</bool></property><property name="enabled"><bool>false</bool></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer></item>
+       </layout>
+      </widget>
+
+      <!-- PAGE 3: Visualization -->
+      <widget class="QWidget" name="pageVisualization">
+       <layout class="QVBoxLayout">
+        <property name="contentsMargins"><rect><x>20</x><y>16</y><width>20</width><height>16</height></rect></property>
+        <property name="spacing"><number>14</number></property>
+        <item><widget class="QLabel" name="lblVizTitle"><property name="text"><string>Visualization</string></property><property name="styleSheet"><string notr="true">font-size:16px;font-weight:bold;color:#EAEAEA;padding-bottom:4px;</string></property></widget></item>
+        <item>
+         <widget class="QGroupBox" name="group3DDefaults">
+          <property name="title"><string>3D Explorer Defaults</string></property>
+          <layout class="QFormLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblDefVE"><property name="text"><string>Vertical Exaggeration:</string></property></widget></item>
+           <item row="0" column="1"><widget class="QDoubleSpinBox" name="spinDefVE"><property name="minimum"><double>1.0</double></property><property name="maximum"><double>10.0</double></property><property name="singleStep"><double>0.5</double></property><property name="value"><double>2.0</double></property></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="lblDef3DMode"><property name="text"><string>Default Mode:</string></property></widget></item>
+           <item row="1" column="1"><widget class="QComboBox" name="comboDef3DMode"><item><property name="text"><string>Surface</string></property></item><item><property name="text"><string>Wireframe</string></property></item><item><property name="text"><string>Contours</string></property></item></widget></item>
+           <item row="2" column="0"><widget class="QLabel" name="lblDef3DEngine"><property name="text"><string>Render Engine:</string></property></widget></item>
+           <item row="2" column="1"><widget class="QComboBox" name="comboDef3DEngine"><item><property name="text"><string>Plotly (WebEngine)</string></property></item><item><property name="text"><string>PyQtGraph OpenGL</string></property></item></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer></item>
+       </layout>
+      </widget>
+
+      <!-- PAGE 4: Performance -->
+      <widget class="QWidget" name="pagePerformance">
+       <layout class="QVBoxLayout">
+        <property name="contentsMargins"><rect><x>20</x><y>16</y><width>20</width><height>16</height></rect></property>
+        <property name="spacing"><number>14</number></property>
+        <item><widget class="QLabel" name="lblPerfTitle"><property name="text"><string>Performance</string></property><property name="styleSheet"><string notr="true">font-size:16px;font-weight:bold;color:#EAEAEA;padding-bottom:4px;</string></property></widget></item>
+        <item>
+         <widget class="QGroupBox" name="groupRenderModes">
+          <property name="title"><string>Rendering Modes</string></property>
+          <layout class="QFormLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblSmallDataset"><property name="text"><string>Small (&lt;10k pts):</string></property></widget></item>
+           <item row="0" column="1"><widget class="QComboBox" name="comboSmallMode"><item><property name="text"><string>Full Quality</string></property></item></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="lblMediumDataset"><property name="text"><string>Medium (10k–100k):</string></property></widget></item>
+           <item row="1" column="1"><widget class="QComboBox" name="comboMediumMode"><item><property name="text"><string>Decimated</string></property></item><item><property name="text"><string>Full Quality</string></property></item></widget></item>
+           <item row="2" column="0"><widget class="QLabel" name="lblLargeDataset"><property name="text"><string>Large (&gt;100k):</string></property></widget></item>
+           <item row="2" column="1"><widget class="QComboBox" name="comboLargeMode"><item><property name="text"><string>Progressive</string></property></item><item><property name="text"><string>Decimated</string></property></item></widget></item>
+           <item row="3" column="0"><widget class="QLabel" name="lblGridRes"><property name="text"><string>Grid Resolution:</string></property></widget></item>
+           <item row="3" column="1"><widget class="QSpinBox" name="spinGridRes"><property name="minimum"><number>20</number></property><property name="maximum"><number>500</number></property><property name="value"><number>100</number></property><property name="suffix"><string> px</string></property></widget></item>
+           <item row="4" column="0"><widget class="QLabel" name="lblAsyncBatch"><property name="text"><string>Async Batch Size:</string></property></widget></item>
+           <item row="4" column="1"><widget class="QSpinBox" name="spinAsyncBatch"><property name="minimum"><number>5</number></property><property name="maximum"><number>200</number></property><property name="value"><number>20</number></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer></item>
+       </layout>
+      </widget>
+
+      <!-- PAGE 5: Paths & Export -->
+      <widget class="QWidget" name="pagePaths">
+       <layout class="QVBoxLayout">
+        <property name="contentsMargins"><rect><x>20</x><y>16</y><width>20</width><height>16</height></rect></property>
+        <property name="spacing"><number>14</number></property>
+        <item><widget class="QLabel" name="lblPathsTitle"><property name="text"><string>Paths &amp; Export</string></property><property name="styleSheet"><string notr="true">font-size:16px;font-weight:bold;color:#EAEAEA;padding-bottom:4px;</string></property></widget></item>
+        <item>
+         <widget class="QGroupBox" name="groupPaths">
+          <property name="title"><string>Default Paths</string></property>
+          <layout class="QGridLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <property name="verticalSpacing"><number>8</number></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblProjectDir"><property name="text"><string>Projects:</string></property></widget></item>
+           <item row="0" column="1"><widget class="QLineEdit" name="editProjectDir"><property name="placeholderText"><string>~/GMS_Projects</string></property></widget></item>
+           <item row="0" column="2"><widget class="QPushButton" name="btnBrowseProjects"><property name="text"><string>Browse</string></property><property name="maximumWidth"><number>70</number></property></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="lblExportDir"><property name="text"><string>Exports:</string></property></widget></item>
+           <item row="1" column="1"><widget class="QLineEdit" name="editExportDir"><property name="placeholderText"><string>~/GMS_Exports</string></property></widget></item>
+           <item row="1" column="2"><widget class="QPushButton" name="btnBrowseExports"><property name="text"><string>Browse</string></property><property name="maximumWidth"><number>70</number></property></widget></item>
+           <item row="2" column="0"><widget class="QLabel" name="lblCalDir"><property name="text"><string>Calibrations:</string></property></widget></item>
+           <item row="2" column="1"><widget class="QLineEdit" name="editCalDir"><property name="placeholderText"><string>~/GMS_Calibrations</string></property></widget></item>
+           <item row="2" column="2"><widget class="QPushButton" name="btnBrowseCal"><property name="text"><string>Browse</string></property><property name="maximumWidth"><number>70</number></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupExportDefaults">
+          <property name="title"><string>Export Defaults</string></property>
+          <layout class="QFormLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblExportFmt"><property name="text"><string>Default Format:</string></property></widget></item>
+           <item row="0" column="1"><widget class="QComboBox" name="comboExportFmt"><item><property name="text"><string>PNG (heatmap)</string></property></item><item><property name="text"><string>HTML (3D)</string></property></item><item><property name="text"><string>JSON (data)</string></property></item><item><property name="text"><string>PDF (report)</string></property></item></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer></item>
+       </layout>
+      </widget>
+
+      <!-- PAGE 6: Advanced -->
+      <widget class="QWidget" name="pageAdvanced">
+       <layout class="QVBoxLayout">
+        <property name="contentsMargins"><rect><x>20</x><y>16</y><width>20</width><height>16</height></rect></property>
+        <property name="spacing"><number>14</number></property>
+        <item><widget class="QLabel" name="lblAdvTitle"><property name="text"><string>Advanced</string></property><property name="styleSheet"><string notr="true">font-size:16px;font-weight:bold;color:#EAEAEA;padding-bottom:4px;</string></property></widget></item>
+        <item>
+         <widget class="QGroupBox" name="groupLogging">
+          <property name="title"><string>Logging</string></property>
+          <layout class="QFormLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item row="0" column="0"><widget class="QLabel" name="lblLogLevel"><property name="text"><string>Log Level:</string></property></widget></item>
+           <item row="0" column="1"><widget class="QComboBox" name="comboLogLevel"><item><property name="text"><string>INFO</string></property></item><item><property name="text"><string>DEBUG</string></property></item><item><property name="text"><string>WARNING</string></property></item><item><property name="text"><string>ERROR</string></property></item></widget></item>
+           <item row="1" column="0"><widget class="QLabel" name="lblLogFile"><property name="text"><string>Log File:</string></property></widget></item>
+           <item row="1" column="1"><widget class="QLineEdit" name="editLogFile"><property name="placeholderText"><string>logs/gms.log</string></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupDeveloper">
+          <property name="title"><string>Developer</string></property>
+          <layout class="QVBoxLayout">
+           <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+           <item><widget class="QCheckBox" name="checkShowConfigHash"><property name="text"><string>Show pipeline config hash in status bar</string></property><property name="checked"><bool>true</bool></property></widget></item>
+           <item><widget class="QCheckBox" name="checkShowFPS"><property name="text"><string>Show FPS in status bar</string></property><property name="checked"><bool>true</bool></property></widget></item>
+           <item><widget class="QCheckBox" name="checkShowQueueSize"><property name="text"><string>Show async queue size in status bar</string></property><property name="checked"><bool>false</bool></property></widget></item>
+          </layout>
+         </widget>
+        </item>
+        <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>40</height></size></property></spacer></item>
+       </layout>
+      </widget>
+
+     </widget>
+    </widget>
+   </item>
+
+   <!-- Bottom button row -->
+   <item>
+    <widget class="QWidget" name="settingsBtnRow">
+     <property name="maximumHeight"><number>52</number></property>
+     <property name="styleSheet"><string notr="true">QWidget{background:#252526;border-top:1px solid #3A3A3C;}</string></property>
+     <layout class="QHBoxLayout">
+      <property name="contentsMargins"><rect><x>16</x><y>10</y><width>16</width><height>10</height></rect></property>
+      <property name="spacing"><number>8</number></property>
+      <item><widget class="QPushButton" name="btnRestoreDefaults"><property name="text"><string>Restore Defaults</string></property></widget></item>
+      <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+      <item><widget class="QPushButton" name="btnApplySettings"><property name="text"><string>Apply</string></property></widget></item>
+      <item>
+       <widget class="QPushButton" name="btnOKSettings">
+        <property name="text"><string>OK</string></property>
+        <property name="styleSheet"><string notr="true">QPushButton{background:#3A86FF;color:#FFF;font-weight:bold;border:none;border-radius:4px;padding:7px 24px;}QPushButton:hover{background:#5599FF;}</string></property>
+       </widget>
+      </item>
+      <item><widget class="QPushButton" name="btnCancelSettings"><property name="text"><string>Cancel</string></property></widget></item>
+     </layout>
+    </widget>
+   </item>
+
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

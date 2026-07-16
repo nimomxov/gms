@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>460</width><height>360</height></rect>
+  </property>
+  <property name="windowTitle"><string>About GMS</string></property>
+  <property name="styleSheet">
+   <string notr="true">
+QDialog { background: #1E1E1E; color: #EAEAEA; }
+QLabel { color: #CCCCCC; }
+QPushButton {
+    background: #2D2D30; color: #CCCCCC;
+    border: 1px solid #3A3A3C; border-radius: 4px;
+    padding: 6px 20px; font-size: 11px;
+}
+QPushButton:hover { background: #3A86FF; color: #FFF; border-color: #3A86FF; }
+QFrame[frameShape="4"] { color: #3A3A3C; }
+   </string>
+  </property>
+
+  <layout class="QVBoxLayout" name="aboutLayout">
+   <property name="contentsMargins"><rect><x>0</x><y>0</y><width>0</width><height>20</height></rect></property>
+   <property name="spacing"><number>0</number></property>
+
+   <!-- Header band -->
+   <item>
+    <widget class="QWidget" name="aboutHeader">
+     <property name="minimumHeight"><number>100</number></property>
+     <property name="styleSheet">
+      <string notr="true">
+QWidget#aboutHeader {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #0D1A33, stop:1 #1A2744);
+    border-bottom: 2px solid #3A86FF;
+}
+      </string>
+     </property>
+     <layout class="QHBoxLayout">
+      <property name="contentsMargins"><rect><x>32</x><y>20</y><width>32</width><height>20</height></rect></property>
+      <item>
+       <layout class="QVBoxLayout">
+        <property name="spacing"><number>4</number></property>
+        <item>
+         <widget class="QLabel" name="lblAboutLogo">
+          <property name="text"><string>⬡ GMS</string></property>
+          <property name="styleSheet"><string notr="true">font-size:36px;font-weight:bold;color:#3A86FF;letter-spacing:4px;</string></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblAboutTagline">
+          <property name="text"><string>Geophysical Modeling System</string></property>
+          <property name="styleSheet"><string notr="true">font-size:13px;color:#AAAAAA;letter-spacing:1px;</string></property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+      <item>
+       <layout class="QVBoxLayout">
+        <property name="spacing"><number>4</number></property>
+        <item><widget class="QLabel" name="lblAboutVersion"><property name="text"><string>Version 3.0</string></property><property name="styleSheet"><string notr="true">font-size:14px;color:#3A86FF;font-weight:bold;text-align:right;</string></property><property name="alignment"><set>Qt::AlignRight</set></property></widget></item>
+        <item><widget class="QLabel" name="lblAboutBuild"><property name="text"><string>Build: 2025-Q4</string></property><property name="styleSheet"><string notr="true">font-size:10px;color:#555555;text-align:right;</string></property><property name="alignment"><set>Qt::AlignRight</set></property></widget></item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Info grid -->
+   <item>
+    <widget class="QWidget" name="aboutInfo">
+     <layout class="QVBoxLayout">
+      <property name="contentsMargins"><rect><x>32</x><y>20</y><width>32</width><height>8</height></rect></property>
+      <property name="spacing"><number>8</number></property>
+
+      <item>
+       <layout class="QGridLayout">
+        <property name="horizontalSpacing"><number>16</number></property>
+        <property name="verticalSpacing"><number>10</number></property>
+        <item row="0" column="0"><widget class="QLabel" name="lblArchKey"><property name="text"><string>Architecture:</string></property><property name="styleSheet"><string notr="true">color:#666666;font-size:11px;</string></property></widget></item>
+        <item row="0" column="1"><widget class="QLabel" name="lblArchVal"><property name="text"><string>Adaptive capability-aware geophysical pipeline</string></property><property name="styleSheet"><string notr="true">color:#CCCCCC;font-size:11px;</string></property></widget></item>
+        <item row="1" column="0"><widget class="QLabel" name="lblStackKey"><property name="text"><string>Stack:</string></property><property name="styleSheet"><string notr="true">color:#666666;font-size:11px;</string></property></widget></item>
+        <item row="1" column="1"><widget class="QLabel" name="lblStackVal"><property name="text"><string>Python · PySide6 · PyQtGraph · Plotly · NumPy · SciPy</string></property><property name="styleSheet"><string notr="true">color:#CCCCCC;font-size:11px;</string></property></widget></item>
+        <item row="2" column="0"><widget class="QLabel" name="lblPresetsKey"><property name="text"><string>Production preset:</string></property><property name="styleSheet"><string notr="true">color:#666666;font-size:11px;</string></property></widget></item>
+        <item row="2" column="1"><widget class="QLabel" name="lblPresetsVal"><property name="text"><string>stable (FPR=0%, benchmark validated)</string></property><property name="styleSheet"><string notr="true">color:#2ECC71;font-size:11px;font-weight:bold;</string></property></widget></item>
+        <item row="3" column="0"><widget class="QLabel" name="lblPhilosophyKey"><property name="text"><string>Philosophy:</string></property><property name="styleSheet"><string notr="true">color:#666666;font-size:11px;</string></property></widget></item>
+        <item row="3" column="1"><widget class="QLabel" name="lblPhilosophyVal"><property name="text"><string>Scientific honesty · No fake depth · No hallucinated confidence</string></property><property name="styleSheet"><string notr="true">color:#CCCCCC;font-size:11px;</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
+       </layout>
+      </item>
+
+      <item><widget class="QFrame" name="aboutSep"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="styleSheet"><string notr="true">color:#3A3A3C;</string></property></widget></item>
+
+      <item>
+       <widget class="QLabel" name="lblAboutLicense">
+        <property name="text"><string>GMS is a professional geophysical analysis platform. All anomaly positions are estimates only.</string></property>
+        <property name="styleSheet"><string notr="true">font-size:10px;color:#555555;</string></property>
+        <property name="wordWrap"><bool>true</bool></property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property></spacer></item>
+
+   <!-- Button row -->
+   <item>
+    <widget class="QWidget" name="aboutBtnRow">
+     <layout class="QHBoxLayout">
+      <property name="contentsMargins"><rect><x>32</x><y>0</y><width>32</width><height>16</height></rect></property>
+      <item><widget class="QPushButton" name="btnAboutDocs"><property name="text"><string>Documentation</string></property></widget></item>
+      <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+      <item><widget class="QPushButton" name="btnAboutClose"><property name="text"><string>Close</string></property><property name="styleSheet"><string notr="true">QPushButton{background:#3A86FF;color:#FFF;font-weight:bold;border:none;border-radius:4px;padding:6px 24px;}QPushButton:hover{background:#5599FF;}</string></property></widget></item>
+     </layout>
+    </widget>
+   </item>
+
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

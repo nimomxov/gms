@@ -1,0 +1,33 @@
+# GMS BLE Device Profile
+name: gms_ble
+description: >
+  GMS native BLE gradiometer. Full telemetry stream including
+  position, heading, SNR, baseline, stability, and noise floor.
+
+auto_detect_fields:
+  - bt_value
+  - stability
+  - noise_floor
+
+field_aliases:
+  bt_value:         signal
+  gradient_filtered: filtered_signal
+  noise_floor:      noise_floor
+  stability:        stability
+  heading_deg:      heading
+  baseline_mv:      baseline
+  snr_db:           snr
+  scan_x:           x
+  scan_y:           y
+  ts_ms:            timestamp
+
+scaling:
+  signal: 1.0
+  snr:    1.0
+
+value_range: [0, 4095]
+telemetry_notes: >
+  BLE packets at 10 Hz. Signal is 12-bit ADC output.
+  Stability is 0–100 (100 = perfectly stable).
+  Noise floor is RMS EMI in ADC counts.
+recommended_preset: stable

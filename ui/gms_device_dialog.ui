@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DeviceDialog</class>
+ <widget class="QDialog" name="DeviceDialog">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>540</width><height>480</height></rect>
+  </property>
+  <property name="windowTitle"><string>GMS — Device Connection</string></property>
+  <property name="styleSheet">
+   <string notr="true">
+QDialog { background: #1E1E1E; color: #EAEAEA; }
+QLabel { color: #CCCCCC; font-size: 11px; }
+QGroupBox {
+    color: #888888; font-size: 11px;
+    border: 1px solid #3A3A3C; border-radius: 5px;
+    margin-top: 10px; padding-top: 6px;
+}
+QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 4px; color: #666666; }
+QPushButton {
+    background: #2D2D30; color: #CCCCCC;
+    border: 1px solid #3A3A3C; border-radius: 4px;
+    padding: 6px 16px; font-size: 11px; min-height: 28px;
+}
+QPushButton:hover { background: #3A86FF; color: #FFF; border-color: #3A86FF; }
+QPushButton:pressed { background: #2266CC; }
+QPushButton:disabled { background: #252526; color: #444444; border-color: #2A2A2A; }
+QComboBox {
+    background: #1A1A1A; color: #EAEAEA;
+    border: 1px solid #3A3A3C; border-radius: 3px; padding: 4px 8px;
+}
+QComboBox::drop-down { border: none; }
+QComboBox QAbstractItemView { background: #2D2D30; color: #EAEAEA; border: 1px solid #3A3A3C; }
+QListWidget {
+    background: #1A1A1A; color: #EAEAEA;
+    border: 1px solid #3A3A3C; border-radius: 4px; font-size: 11px;
+}
+QListWidget::item { padding: 6px 10px; border-bottom: 1px solid #2A2A2A; }
+QListWidget::item:selected { background: #1A3A5A; }
+QListWidget::item:hover { background: #2A2A2A; }
+QTabWidget::pane { background: #1E1E1E; border: 1px solid #3A3A3C; }
+QTabBar::tab { background: #2D2D30; color: #888888; border: none; padding: 7px 18px; font-size: 11px; }
+QTabBar::tab:selected { background: #1E1E1E; color: #EAEAEA; border-top: 2px solid #3A86FF; }
+QTabBar::tab:hover:!selected { background: #3A3A3C; }
+QProgressBar {
+    background: #1A1A1A; border: 1px solid #3A3A3C; border-radius: 3px;
+    color: #EAEAEA; text-align: center; font-size: 10px; height: 16px;
+}
+QProgressBar::chunk { background: #3A86FF; border-radius: 2px; }
+   </string>
+  </property>
+
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="contentsMargins"><rect><x>16</x><y>16</y><width>16</width><height>16</height></rect></property>
+   <property name="spacing"><number>12</number></property>
+
+   <!-- Header -->
+   <item>
+    <widget class="QWidget" name="dialogHeader">
+     <property name="styleSheet"><string notr="true">QWidget{background:#1A2744;border-radius:6px;}</string></property>
+     <layout class="QHBoxLayout">
+      <property name="contentsMargins"><rect><x>16</x><y>12</y><width>16</width><height>12</height></rect></property>
+      <item>
+       <layout class="QVBoxLayout">
+        <property name="spacing"><number>3</number></property>
+        <item><widget class="QLabel" name="lblDialogTitle"><property name="text"><string>Device Connection</string></property><property name="styleSheet"><string notr="true">font-size:16px;font-weight:bold;color:#EAEAEA;</string></property></widget></item>
+        <item><widget class="QLabel" name="lblDialogSubtitle"><property name="text"><string>Connect a BLE gradiometer or serial device</string></property><property name="styleSheet"><string notr="true">font-size:11px;color:#888888;</string></property></widget></item>
+       </layout>
+      </item>
+      <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+      <item>
+       <widget class="QLabel" name="lblConnStatus">
+        <property name="text"><string>● Disconnected</string></property>
+        <property name="styleSheet"><string notr="true">font-size:11px;color:#E63946;font-weight:bold;</string></property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Tab widget: BLE / Serial -->
+   <item>
+    <widget class="QTabWidget" name="connTabs">
+
+     <!-- BLE Tab -->
+     <widget class="QWidget" name="tabBLE">
+      <attribute name="title"><string>BLE Bluetooth</string></attribute>
+      <layout class="QVBoxLayout">
+       <property name="contentsMargins"><rect><x>12</x><y>12</y><width>12</width><height>12</height></rect></property>
+       <property name="spacing"><number>8</number></property>
+
+       <item>
+        <widget class="QWidget" name="bleScanRow">
+         <layout class="QHBoxLayout">
+          <property name="contentsMargins"><rect><x>0</x><y>0</y><width>0</width><height>0</height></rect></property>
+          <property name="spacing"><number>8</number></property>
+          <item><widget class="QPushButton" name="btnBLEScan"><property name="text"><string>⟳ Scan for Devices</string></property></widget></item>
+          <item>
+           <widget class="QProgressBar" name="bleScanProgress">
+            <property name="maximum"><number>0</number></property>
+            <property name="value"><number>-1</number></property>
+            <property name="visible"><bool>false</bool></property>
+           </widget>
+          </item>
+          <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QListWidget" name="listBLEDevices">
+         <property name="minimumHeight"><number>160</number></property>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QGroupBox" name="groupBLEDevice">
+         <property name="title"><string>Selected Device</string></property>
+         <layout class="QFormLayout">
+          <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+          <item row="0" column="0"><widget class="QLabel" name="lblBLEName"><property name="text"><string>Name:</string></property></widget></item>
+          <item row="0" column="1"><widget class="QLabel" name="valBLEName"><property name="text"><string>—</string></property><property name="styleSheet"><string notr="true">color:#3A86FF;font-weight:bold;</string></property></widget></item>
+          <item row="1" column="0"><widget class="QLabel" name="lblBLEAddr"><property name="text"><string>Address:</string></property></widget></item>
+          <item row="1" column="1"><widget class="QLabel" name="valBLEAddr"><property name="text"><string>—</string></property><property name="styleSheet"><string notr="true">color:#888888;font-family:monospace;</string></property></widget></item>
+          <item row="2" column="0"><widget class="QLabel" name="lblBLERSSI"><property name="text"><string>RSSI:</string></property></widget></item>
+          <item row="2" column="1"><widget class="QLabel" name="valBLERSSI"><property name="text"><string>—</string></property><property name="styleSheet"><string notr="true">color:#888888;</string></property></widget></item>
+          <item row="3" column="0"><widget class="QLabel" name="lblBLEProfile"><property name="text"><string>Profile:</string></property></widget></item>
+          <item row="3" column="1">
+           <widget class="QComboBox" name="comboBLEProfile">
+            <item><property name="text"><string>Auto-detect</string></property></item>
+            <item><property name="text"><string>GMS BLE Native</string></property></item>
+            <item><property name="text"><string>OKM Compatible</string></property></item>
+            <item><property name="text"><string>Generic UART</string></property></item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+      </layout>
+     </widget>
+
+     <!-- Serial Tab -->
+     <widget class="QWidget" name="tabSerial">
+      <attribute name="title"><string>Serial / USB</string></attribute>
+      <layout class="QVBoxLayout">
+       <property name="contentsMargins"><rect><x>12</x><y>12</y><width>12</width><height>12</height></rect></property>
+       <property name="spacing"><number>8</number></property>
+
+       <item>
+        <widget class="QWidget" name="serialScanRow">
+         <layout class="QHBoxLayout">
+          <property name="contentsMargins"><rect><x>0</x><y>0</y><width>0</width><height>0</height></rect></property>
+          <property name="spacing"><number>8</number></property>
+          <item><widget class="QPushButton" name="btnRefreshPorts"><property name="text"><string>⟳ Refresh Ports</string></property></widget></item>
+          <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QListWidget" name="listSerialPorts">
+         <property name="minimumHeight"><number>120</number></property>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QGroupBox" name="groupSerialParams">
+         <property name="title"><string>Serial Parameters</string></property>
+         <layout class="QGridLayout">
+          <property name="contentsMargins"><rect><x>12</x><y>14</y><width>12</width><height>10</height></rect></property>
+          <property name="horizontalSpacing"><number>8</number></property>
+          <property name="verticalSpacing"><number>8</number></property>
+          <item row="0" column="0"><widget class="QLabel" name="lblBaudRate"><property name="text"><string>Baud Rate:</string></property></widget></item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBaudRate">
+            <item><property name="text"><string>9600</string></property></item>
+            <item><property name="text"><string>19200</string></property></item>
+            <item><property name="text"><string>38400</string></property></item>
+            <item><property name="text"><string>57600</string></property></item>
+            <item><property name="text"><string>115200</string></property></item>
+           </widget>
+          </item>
+          <item row="0" column="2"><widget class="QLabel" name="lblDataBits"><property name="text"><string>Data Bits:</string></property></widget></item>
+          <item row="0" column="3">
+           <widget class="QComboBox" name="comboDataBits">
+            <item><property name="text"><string>8</string></property></item>
+            <item><property name="text"><string>7</string></property></item>
+           </widget>
+          </item>
+          <item row="1" column="0"><widget class="QLabel" name="lblParity"><property name="text"><string>Parity:</string></property></widget></item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboParity">
+            <item><property name="text"><string>None</string></property></item>
+            <item><property name="text"><string>Even</string></property></item>
+            <item><property name="text"><string>Odd</string></property></item>
+           </widget>
+          </item>
+          <item row="1" column="2"><widget class="QLabel" name="lblStopBits"><property name="text"><string>Stop Bits:</string></property></widget></item>
+          <item row="1" column="3">
+           <widget class="QComboBox" name="comboStopBits">
+            <item><property name="text"><string>1</string></property></item>
+            <item><property name="text"><string>2</string></property></item>
+           </widget>
+          </item>
+          <item row="2" column="0"><widget class="QLabel" name="lblSerialProfile"><property name="text"><string>Profile:</string></property></widget></item>
+          <item row="2" column="1" colspan="3">
+           <widget class="QComboBox" name="comboSerialProfile">
+            <item><property name="text"><string>Auto-detect</string></property></item>
+            <item><property name="text"><string>UART Simple</string></property></item>
+            <item><property name="text"><string>Generic CSV</string></property></item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+      </layout>
+     </widget>
+
+    </widget>
+   </item>
+
+   <!-- Telemetry log -->
+   <item>
+    <widget class="QGroupBox" name="groupTelLog">
+     <property name="title"><string>Telemetry Log</string></property>
+     <layout class="QVBoxLayout">
+      <property name="contentsMargins"><rect><x>8</x><y>12</y><width>8</width><height>8</height></rect></property>
+      <item>
+       <widget class="QTextEdit" name="textTelLog">
+        <property name="maximumHeight"><number>80</number></property>
+        <property name="readOnly"><bool>true</bool></property>
+        <property name="styleSheet"><string notr="true">QTextEdit{background:#111111;color:#44DD88;border:none;font-family:monospace;font-size:10px;}</string></property>
+        <property name="placeholderText"><string>Connection log will appear here...</string></property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- Button row -->
+   <item>
+    <widget class="QWidget" name="btnRow">
+     <layout class="QHBoxLayout">
+      <property name="contentsMargins"><rect><x>0</x><y>0</y><width>0</width><height>0</height></rect></property>
+      <property name="spacing"><number>8</number></property>
+      <item><widget class="QPushButton" name="btnTelemetryInspect"><property name="text"><string>Inspect Schema</string></property></widget></item>
+      <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+      <item>
+       <widget class="QPushButton" name="btnConnect">
+        <property name="text"><string>Connect</string></property>
+        <property name="styleSheet"><string notr="true">QPushButton{background:#3A86FF;color:#FFF;font-weight:bold;border:none;border-radius:4px;padding:7px 24px;}QPushButton:hover{background:#5599FF;}QPushButton:pressed{background:#2266CC;}</string></property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnDisconnect">
+        <property name="text"><string>Disconnect</string></property>
+        <property name="enabled"><bool>false</bool></property>
+        <property name="styleSheet"><string notr="true">QPushButton{background:#2D2D30;color:#E63946;border:1px solid #E63946;border-radius:4px;padding:7px 16px;}QPushButton:hover{background:#3A1010;}</string></property>
+       </widget>
+      </item>
+      <item><widget class="QPushButton" name="btnCancel"><property name="text"><string>Close</string></property></widget></item>
+     </layout>
+    </widget>
+   </item>
+
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

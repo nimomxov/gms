@@ -1,0 +1,93 @@
+# Geophysical Modeling System — Configuration
+# Version: 1.0.0
+
+system:
+  version: "1.0.0"
+  name: "GMS - Geophysical Modeling System"
+  log_level: "INFO"
+  output_dir: "reports"
+
+data_ingestion:
+  expected_columns: ["x", "y", "value"]
+  value_range: [0, 1024]        # ADC uint16 mapped range
+  min_samples_per_scan: 50
+  max_gap_fraction: 0.2         # reject scan if >20% missing
+
+signal_processing:
+  drift_removal:
+    enabled: true
+    method: "median_line"         # RECOMMENDED: line-by-line robust baseline
+    window_fraction: 0.90         # very wide = compact anomalies preserved         # rolling window = 50% of line length
+    # --- legacy options (not recommended) ---
+    # method: "polynomial"        # absorbs dipole lobes — avoid
+    # poly_degree: 2
+    # method: "highpass"          # 2D Gaussian high-pass after gridding
+    # highpass_sigma_fraction: 0.15
+  noise_filter:
+    method: "mad"
+    mad_threshold: 3.5
+    kernel_size: 3                # reduced from 5 — less smoothing preserves dipole lobes
+  grid_interpolation:
+    mode: "cubic"                # STABLE DEFAULT: griddata cubic (Delaunay triangulation)
+    # mode: "rbf"                # EXPERIMENTAL: RBF thin_plate_spline (physics-aware,
+    #                            #   better field continuity, no triangulation artifacts,
+    #                            #   but edge-sensitive on noisy data — use on dense scans)
+    rbf_kernel: "thin_plate_spline"   # used only when mode: rbf
+    resolution: 0.1              # grid cell size (same units as x,y in CSV)
+
+anomaly_detection:
+  snr_min: 2.6                  # balanced: clean floor from 2D baseline
+  smoothness_threshold: 0.4     # 0=rough, 1=smooth
+  dipole_score_min: 0.35        # metal dipole pattern minimum
+  min_spatial_extent: 5         # minimum cells for valid anomaly
+  multi_scale_sigmas: [1.0, 2.0, 4.0]
+
+classification:
+  # Weighted FINAL_SCORE = 0.35*dipole + 0.25*polarity_norm + 0.20*coherence + 0.20*smoothness
+  FERROUS_METAL:
+    final_score_min: 0.48       # high composite score required
+    snr_min: 3.5
+    coherence_min: 0.55         # blob must be internally consistent
+    # Guard: polarity must not be < -0.50 (coded in classifier)
+  CAVITY:
+    final_score_max: 0.42       # low composite score = negative/suppression
+    snr_min: 3.0
+    smoothness_min: 0.65        # cavities are distinctly smooth
+  ROCK_DEBRIS:
+    snr_min: 2.5
+  NOISE:
+    snr_max: 1.8
+  SOIL_VARIATION:
+    snr_min: 2.0
+    snr_max: 4.0
+
+decision:
+  DIG:
+    min_scan_confirmations: 2
+    min_confidence: 0.70
+    max_uncertainty: 0.25
+    snr_min: 4.0
+  RESCAN:
+    min_scan_confirmations: 1
+    min_confidence: 0.45
+  # Anything below RESCAN thresholds → NO_DIG
+
+visualization:
+  colormap: "RdYlBu_r"
+  dpi: 150
+  export_html: true
+  marker_size: 120
+  figure_size: [12, 8]
+
+# Multi-scan fusion
+# -----------------
+# Controls MultiScanFusionEngine parameters used inside PipelineWorker.
+# xy_tolerance_m:    max XY distance (metres) for two anomalies to be the
+#                    same physical target. Scale to sensor footprint.
+# depth_tolerance_m: max depth difference when depth estimates available.
+# repeatability_scale: weight [0,1] of the repeatability bonus on top of
+#                    base confidence. 0.20 = bonus contributes up to 20%.
+fusion:
+  xy_tolerance_m:      0.30
+  depth_tolerance_m:   0.15
+  repeatability_scale: 0.20

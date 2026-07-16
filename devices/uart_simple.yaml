@@ -1,0 +1,28 @@
+# UART Simple Serial Device Profile
+name: uart_simple
+description: >
+  Simple UART/serial single-channel device. Only provides a raw signal
+  value (and optionally a sample index). No position, no SNR.
+  Basic pipeline only: signal normalization + amplitude detector.
+
+auto_detect_fields:
+  - signal
+  - reading
+
+field_aliases:
+  reading:    signal
+  raw:        signal
+  mv:         signal
+  adc:        signal
+  sample:     timestamp
+  idx:        timestamp
+
+scaling:
+  signal: 1.0
+
+value_range: [0, 65535]
+telemetry_notes: >
+  Serial stream at variable baud rate. Signal is raw ADC.
+  No position, no SNR. Heatmap and confidence unavailable.
+  Line visualization mode active.
+recommended_preset: stable

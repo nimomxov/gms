@@ -1,0 +1,99 @@
+2026-05-31 14:08:53,259 [INFO] gms.main: Generating demo scan data...
+2026-05-31 14:09:03,291 [INFO] gms.devices: [DeviceProfileRegistry] Matched profile 'generic_csv' (score=100%)
+2026-05-31 14:09:03,292 [INFO] gms.schema.mapper: [SemanticFieldMapper] scan_A.csv: mapped 3/14 roles. Mapped: ['signal', 'x', 'y']
+2026-05-31 14:09:03,294 [INFO] gms.schema.capabilities: [CapabilityExtractor] Grade: STANDARD | position=True snr=False heading=False baseline=False stability=False noise=False
+2026-05-31 14:09:03,361 [INFO] gms.pipeline.composer:   [DISABLED] PathCorrector: Orientation correction unavailable: device does not provide heading telemetry.
+2026-05-31 14:09:03,361 [INFO] gms.pipeline.composer:   [DISABLED] ConfidenceEngine: Confidence analysis unavailable: device does not provide SNR telemetry.
+2026-05-31 14:09:03,361 [INFO] gms.pipeline.composer:   [DISABLED] UncertaintyRadius: Uncertainty radius unavailable: requires SNR telemetry.
+2026-05-31 14:09:03,659 [INFO] gms.adaptive_ingestion:   [DISABLED] PathCorrector: Orientation correction unavailable: device does not provide heading telemetry.
+2026-05-31 14:09:03,659 [INFO] gms.adaptive_ingestion:   [DISABLED] ConfidenceEngine: Confidence analysis unavailable: device does not provide SNR telemetry.
+2026-05-31 14:09:03,659 [INFO] gms.adaptive_ingestion:   [DISABLED] UncertaintyRadius: Uncertainty radius unavailable: requires SNR telemetry.
+2026-05-31 14:09:03,713 [INFO] gms.devices: [DeviceProfileRegistry] Matched profile 'generic_csv' (score=100%)
+2026-05-31 14:09:03,713 [INFO] gms.schema.mapper: [SemanticFieldMapper] scan_B.csv: mapped 3/14 roles. Mapped: ['signal', 'x', 'y']
+2026-05-31 14:09:03,713 [INFO] gms.schema.capabilities: [CapabilityExtractor] Grade: STANDARD | position=True snr=False heading=False baseline=False stability=False noise=False
+2026-05-31 14:09:03,717 [INFO] gms.pipeline.composer:   [DISABLED] PathCorrector: Orientation correction unavailable: device does not provide heading telemetry.
+2026-05-31 14:09:03,717 [INFO] gms.pipeline.composer:   [DISABLED] ConfidenceEngine: Confidence analysis unavailable: device does not provide SNR telemetry.
+2026-05-31 14:09:03,717 [INFO] gms.pipeline.composer:   [DISABLED] UncertaintyRadius: Uncertainty radius unavailable: requires SNR telemetry.
+2026-05-31 14:09:03,962 [INFO] gms.adaptive_ingestion:   [DISABLED] PathCorrector: Orientation correction unavailable: device does not provide heading telemetry.
+2026-05-31 14:09:03,962 [INFO] gms.adaptive_ingestion:   [DISABLED] ConfidenceEngine: Confidence analysis unavailable: device does not provide SNR telemetry.
+2026-05-31 14:09:03,962 [INFO] gms.adaptive_ingestion:   [DISABLED] UncertaintyRadius: Uncertainty radius unavailable: requires SNR telemetry.
+2026-05-31 14:09:04,010 [INFO] gms.devices: [DeviceProfileRegistry] Matched profile 'generic_csv' (score=100%)
+2026-05-31 14:09:04,011 [INFO] gms.schema.mapper: [SemanticFieldMapper] scan_C_noise_only.csv: mapped 3/14 roles. Mapped: ['signal', 'x', 'y']
+2026-05-31 14:09:04,011 [INFO] gms.schema.capabilities: [CapabilityExtractor] Grade: STANDARD | position=True snr=False heading=False baseline=False stability=False noise=False
+2026-05-31 14:09:04,011 [INFO] gms.pipeline.composer:   [DISABLED] PathCorrector: Orientation correction unavailable: device does not provide heading telemetry.
+2026-05-31 14:09:04,011 [INFO] gms.pipeline.composer:   [DISABLED] ConfidenceEngine: Confidence analysis unavailable: device does not provide SNR telemetry.
+2026-05-31 14:09:04,011 [INFO] gms.pipeline.composer:   [DISABLED] UncertaintyRadius: Uncertainty radius unavailable: requires SNR telemetry.
+2026-05-31 14:09:04,210 [INFO] gms.adaptive_ingestion:   [DISABLED] PathCorrector: Orientation correction unavailable: device does not provide heading telemetry.
+2026-05-31 14:09:04,210 [INFO] gms.adaptive_ingestion:   [DISABLED] ConfidenceEngine: Confidence analysis unavailable: device does not provide SNR telemetry.
+2026-05-31 14:09:04,211 [INFO] gms.adaptive_ingestion:   [DISABLED] UncertaintyRadius: Uncertainty radius unavailable: requires SNR telemetry.
+2026-05-31 14:09:04,211 [INFO] gms.adaptive_ingestion: [AdaptiveIngestion] Loaded 3/3 scans
+2026-05-31 14:09:04,211 [INFO] gms.main:   scan_A.csv: grade=STANDARD pos=True snr=False
+2026-05-31 14:09:04,211 [INFO] gms.main:   scan_B.csv: grade=STANDARD pos=True snr=False
+2026-05-31 14:09:04,211 [INFO] gms.main:   scan_C_noise_only.csv: grade=STANDARD pos=True snr=False
+2026-05-31 14:09:04,211 [INFO] gms.pipeline: Using preset pipeline: stable
+2026-05-31 14:09:04,276 [INFO] gms.ingestion: Loading scan: scan_A.csv
+2026-05-31 14:09:05,981 [INFO] gms.detector: [LoG] detecting in scan_A_690fc35b
+2026-05-31 14:09:05,993 [INFO] gms.detector:   1 valid anomalies
+2026-05-31 14:09:06,026 [INFO] gms.reliability:   Reliability [scan_A_690fc35b]: quality=GOOD  snr=2.2  coh=0.708  stab=0.46  cov=100%  flags=['low_snr']
+2026-05-31 14:09:06,026 [INFO] gms.pipeline:   [scan_A_690fc35b] 1 anomalies  quality=0.81  detector=log_detector
+2026-05-31 14:09:06,028 [INFO] gms.ingestion: Loading scan: scan_B.csv
+2026-05-31 14:09:07,082 [INFO] gms.detector: [LoG] detecting in scan_B_e74ce544
+2026-05-31 14:09:07,091 [INFO] gms.detector:   1 valid anomalies
+2026-05-31 14:09:07,109 [INFO] gms.reliability:   Reliability [scan_B_e74ce544]: quality=GOOD  snr=2.0  coh=0.703  stab=0.57  cov=100%  flags=['low_snr']
+2026-05-31 14:09:07,109 [INFO] gms.pipeline:   [scan_B_e74ce544] 1 anomalies  quality=0.76  detector=log_detector
+2026-05-31 14:09:07,109 [INFO] gms.ingestion: Loading scan: scan_C_noise_only.csv
+2026-05-31 14:09:07,903 [INFO] gms.detector: [LoG] detecting in scan_C_noise_only_d5774264
+2026-05-31 14:09:07,909 [INFO] gms.detector:   0 valid anomalies
+2026-05-31 14:09:07,931 [INFO] gms.reliability:   Reliability [scan_C_noise_onl]: quality=MARGINAL  snr=1.5  coh=0.032  stab=0.83  cov=100%  flags=['low_snr', 'low_spatial_coherence']
+2026-05-31 14:09:07,931 [INFO] gms.pipeline:   [scan_C_noise_only_] 0 anomalies  quality=0.66  detector=log_detector
+2026-05-31 14:09:07,931 [INFO] gms.decision: Cross-scan validation: 3 scans
+2026-05-31 14:09:07,931 [INFO] gms.decision:   1 confirmed groups, 0 single detections
+2026-05-31 14:09:07,931 [INFO] gms.decision:   Decision: DIG (1 qualifying anomalies)
+2026-05-31 14:09:10,094 [INFO] gms.viz:   Saved heatmap: reports\demo_scan_A_690fc35b_heatmap.png
+2026-05-31 14:09:20,907 [INFO] gms.viz:   Saved interactive HTML: reports\demo_scan_A_690fc35b_heatmap.html
+2026-05-31 14:09:23,165 [INFO] gms.viz:   Saved heatmap: reports\demo_scan_B_e74ce544_heatmap.png
+2026-05-31 14:09:23,382 [INFO] gms.viz:   Saved interactive HTML: reports\demo_scan_B_e74ce544_heatmap.html
+2026-05-31 14:09:25,398 [INFO] gms.viz:   Saved heatmap: reports\demo_scan_C_noise_only_d5774264_heatmap.png
+2026-05-31 14:09:25,604 [INFO] gms.viz:   Saved interactive HTML: reports\demo_scan_C_noise_only_d5774264_heatmap.html
+2026-05-31 14:09:32,009 [INFO] gms.viz:   Saved final map: reports\demo_final_confirmed_anomalies.png
+2026-05-31 14:09:33,572 [INFO] gms.viz.engine: [VizEngine] No position data — rendered line chart: scan_A_690fc35b_line.png
+2026-05-31 14:09:34,804 [INFO] gms.viz.engine: [VizEngine] No position data — rendered line chart: scan_B_e74ce544_line.png
+2026-05-31 14:09:36,281 [INFO] gms.viz.engine: [VizEngine] No position data — rendered line chart: scan_C_noise_only_d5774264_line.png
+2026-05-31 14:09:36,281 [INFO] gms.main: ============================================================
+2026-05-31 14:09:36,281 [INFO] gms.main: FINAL DECISION: DIG
+2026-05-31 14:09:36,281 [INFO] gms.main: Telemetry Grade: STANDARD — signal + position
+2026-05-31 14:09:36,281 [INFO] gms.main: Pipeline: cubic -> line_median -> log
+2026-05-31 14:09:36,281 [INFO] gms.main: Config hash: 42326a5a9dfc
+2026-05-31 14:09:36,346 [INFO] gms.main: JSON saved: reports\demo_result.json
+2026-05-31 14:09:36,346 [INFO] gms.main: ============================================================
+2026-06-01 03:36:52,878 [INFO] gms.devices: [DeviceProfileRegistry] Matched profile 'generic_csv' (score=100%)
+2026-06-01 03:36:52,892 [INFO] gms.schema.mapper: [SemanticFieldMapper] scan_A.csv: mapped 3/14 roles. Mapped: ['signal', 'x', 'y']
+2026-06-01 03:36:52,892 [INFO] gms.schema.capabilities: [CapabilityExtractor] Grade: STANDARD | position=True snr=False heading=False baseline=False stability=False noise=False
+2026-06-01 03:36:52,899 [INFO] gms.pipeline.composer:   [DISABLED] PathCorrector: Orientation correction unavailable: device does not provide heading telemetry.
+2026-06-01 03:36:52,899 [INFO] gms.pipeline.composer:   [DISABLED] ConfidenceEngine: Confidence analysis unavailable: device does not provide SNR telemetry.
+2026-06-01 03:36:52,899 [INFO] gms.pipeline.composer:   [DISABLED] UncertaintyRadius: Uncertainty radius unavailable: requires SNR telemetry.
+2026-06-01 03:36:53,087 [INFO] gms.adaptive_ingestion:   [DISABLED] PathCorrector: Orientation correction unavailable: device does not provide heading telemetry.
+2026-06-01 03:36:53,087 [INFO] gms.adaptive_ingestion:   [DISABLED] ConfidenceEngine: Confidence analysis unavailable: device does not provide SNR telemetry.
+2026-06-01 03:36:53,087 [INFO] gms.adaptive_ingestion:   [DISABLED] UncertaintyRadius: Uncertainty radius unavailable: requires SNR telemetry.
+2026-06-01 03:36:53,088 [INFO] gms.adaptive_ingestion: [AdaptiveIngestion] Loaded 1/1 scans
+2026-06-01 03:36:53,088 [INFO] gms.main:   scan_A.csv: grade=STANDARD pos=True snr=False
+2026-06-01 03:36:53,089 [INFO] gms.pipeline: Using preset pipeline: stable
+2026-06-01 03:36:53,133 [INFO] gms.ingestion: Loading scan: scan_A.csv
+2026-06-01 03:36:54,950 [INFO] gms.detector: [LoG] detecting in scan_A_690fc35b
+2026-06-01 03:36:54,966 [INFO] gms.detector:   1 valid anomalies
+2026-06-01 03:36:54,998 [INFO] gms.reliability:   Reliability [scan_A_690fc35b]: quality=GOOD  snr=2.2  coh=0.708  stab=0.46  cov=100%  flags=['low_snr']
+2026-06-01 03:36:54,998 [INFO] gms.pipeline:   [scan_A_690fc35b] 1 anomalies  quality=0.81  detector=log_detector
+2026-06-01 03:36:54,998 [INFO] gms.decision: Cross-scan validation: 1 scans
+2026-06-01 03:36:54,998 [INFO] gms.decision:   0 confirmed groups, 1 single detections
+2026-06-01 03:36:54,998 [INFO] gms.decision:   Decision: RESCAN
+2026-06-01 03:36:56,848 [INFO] gms.viz:   Saved heatmap: reports\test_debug_scan_A_690fc35b_heatmap.png
+2026-06-01 03:37:05,352 [INFO] gms.viz:   Saved interactive HTML: reports\test_debug_scan_A_690fc35b_heatmap.html
+2026-06-01 03:37:07,372 [INFO] gms.viz:   Saved final map: reports\test_debug_final_confirmed_anomalies.png
+2026-06-01 03:37:09,808 [INFO] gms.viz.engine: [VizEngine] No position data — rendered line chart: scan_A_690fc35b_line.png
+2026-06-01 03:37:09,808 [INFO] gms.main: ============================================================
+2026-06-01 03:37:09,809 [INFO] gms.main: FINAL DECISION: RESCAN
+2026-06-01 03:37:09,809 [INFO] gms.main: Telemetry Grade: STANDARD — signal + position
+2026-06-01 03:37:09,809 [INFO] gms.main: Pipeline: cubic -> line_median -> log
+2026-06-01 03:37:09,809 [INFO] gms.main: Config hash: 42326a5a9dfc
+2026-06-01 03:37:09,814 [INFO] gms.main: JSON saved: reports\test_debug_result.json
+2026-06-01 03:37:09,815 [INFO] gms.main: ============================================================

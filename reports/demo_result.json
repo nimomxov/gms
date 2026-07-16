@@ -1,0 +1,88 @@
+{
+  "session_id": "demo",
+  "pipeline": {
+    "name": "stable",
+    "interpolator": "cubic",
+    "baseline": "line_median",
+    "detector": "log",
+    "config_hash": "42326a5a9dfc"
+  },
+  "decision": "DIG",
+  "confidence_summary": {
+    "overall": 0.713,
+    "max_anomaly_confidence": 0.713,
+    "n_confirmed": 1,
+    "n_single": 0,
+    "label_distribution": {
+      "FERROUS_METAL": 1
+    }
+  },
+  "anomalies": [
+    {
+      "group_id": "G000",
+      "label": "FERROUS_METAL",
+      "centroid_x": 46.48,
+      "centroid_y": 36.19,
+      "combined_confidence": 0.713,
+      "scan_confirmations": 2,
+      "mean_snr": 11.606,
+      "mean_uncertainty": 0.048,
+      "label_agreement": 1.0
+    }
+  ],
+  "scan_quality": {
+    "scan_A_690fc35b": {
+      "quality_score": 0.812,
+      "noise_floor": 14.0444,
+      "n_anomalies_raw": 1,
+      "warnings": []
+    },
+    "scan_B_e74ce544": {
+      "quality_score": 0.764,
+      "noise_floor": 16.0093,
+      "n_anomalies_raw": 1,
+      "warnings": []
+    },
+    "scan_C_noise_only_d5774264": {
+      "quality_score": 0.664,
+      "noise_floor": 7.9271,
+      "n_anomalies_raw": 0,
+      "warnings": []
+    }
+  },
+  "warnings": [],
+  "n_scans_processed": 3,
+  "viz_paths": {
+    "scan_A_690fc35b": {
+      "line_chart": "reports\\scan_A_690fc35b_line.png"
+    },
+    "scan_B_e74ce544": {
+      "line_chart": "reports\\scan_B_e74ce544_line.png"
+    },
+    "scan_C_noise_only_d5774264": {
+      "line_chart": "reports\\scan_C_noise_only_d5774264_line.png"
+    }
+  },
+  "telemetry": {
+    "grade": "STANDARD",
+    "grade_label": "STANDARD \u2014 signal + position",
+    "has_position": true,
+    "has_snr": false,
+    "has_heading": false,
+    "has_baseline": false,
+    "has_noise_floor": false,
+    "has_stability": false,
+    "has_filtered_signal": false,
+    "has_timestamp": false,
+    "features_enabled": {
+      "confidence": false,
+      "uncertainty_radius": false,
+      "path_reconstruction": false,
+      "orientation_correction": false,
+      "2d_heatmap": true,
+      "3d_explorer": true,
+      "adaptive_baseline": true,
+      "depth_estimation": false
+    }
+  }
+}
