@@ -432,6 +432,7 @@ class HeatmapController(QObject):
     def _full_render(self):
         try:
             self._full_render_impl()
+            self._draw_possibility_markers(self._ax)
         except Exception as exc:
             logger.exception("[Heatmap] Full render failed")
             try:
