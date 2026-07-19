@@ -337,24 +337,24 @@ class InspectorPanelController(QObject):
         logger.info(f"[Inspector] REJECTED: {self._current.label}")
 
     def _on_validate(self):
-        """
-        Open the GroundTruthWorkflow validation dialog for the currently
-        selected anomaly.  The workflow object is injected after construction
-        by bootstrap_integration via set_ground_truth_workflow().
-        """
         if not self._current:
             return
         if not hasattr(self, "_gt_workflow") or self._gt_workflow is None:
             logger.warning("[Inspector] GroundTruthWorkflow not attached")
             return
+        # FIX 16: session id + decision now exist on state (see app_state fix).
+        session_id = getattr(self._state, "last_session_id", "")
+        # Prefer this target's own decision_reason-derived decision if present,
+        # else fall back to the session-level decision.
+        predicted_decision = getattr(self._state, "last_decision", "NO_DIG")
         self._gt_workflow.open_validation_panel(
             anomaly_id=self._current.anomaly_id,
-            session_id=getattr(self._state, "last_session_id", ""),
-            predicted_decision=getattr(self._state, "last_decision", "DIG"),
+            session_id=session_id,
+            predicted_decision=predicted_decision,
             predicted_confidence=float(self._current.confidence),
         )
         logger.info(f"[Inspector] Ground truth panel opened: {self._current.anomaly_id}")
-
+        
     def set_ground_truth_workflow(self, workflow) -> None:
         """Inject the GroundTruthWorkflow instance from bootstrap_integration."""
         self._gt_workflow = workflow
