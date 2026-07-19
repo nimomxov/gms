@@ -281,12 +281,16 @@ class GMSApplicationState(QObject):
         else:
             self.pipeline_stages.append(stage)
         self.pipeline_stage_changed.emit(stage)
-
+    
     def set_pipeline_result(self, result: dict):
         self.last_result = result
+        # FIX 16: persist so InspectorPanelController._on_validate() can
+        # attach the real session id + decision to each ValidationRecord.
+        self.last_session_id = result.get("session_id", "")
+        self.last_decision = result.get("decision", "NO_DIG")
         self.pipeline_status = PipelineStatus.COMPLETED
         self.pipeline_completed.emit(result)
-
+        
     def set_visualization(self, key: str, value):
         """Update one visualization parameter and emit appropriate signal."""
         setattr(self.visualization_state, key, value)
