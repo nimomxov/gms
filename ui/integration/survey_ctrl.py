@@ -143,64 +143,63 @@ class SurveyController(QObject):
                 w.setValue(round(val, 3))
                 w.blockSignals(False)
 
+    
     def _on_apply_sensor(self):
         from core.geometry import SensorCalibration, SensorOrientation
         try:
             cal = SensorCalibration(
-                adc_scaling_factor=_spin(self._w, "spinADC",       1.0),
-                gain              =_spin(self._w, "spinGain",      1.0),
-                offset            =_spin(self._w, "spinOffset",    0.0),
-                sensor_spacing_m  =_spin(self._w, "spinSensSpace", 0.5),
-                orientation       =SensorOrientation.VERTICAL_GRADIENT,
+                adc_scaling_factor=_spin(self._w, "spinADC", 1.0),
+                gain=_spin(self._w, "spinGain", 1.0),
+                offset=_spin(self._w, "spinOffset", 0.0),
+                sensor_spacing_m=_spin(self._w, "spinSensSpace", 0.5),
+                orientation=SensorOrientation.VERTICAL_GRADIENT,
             )
             cal.validate()
             meta = self._get_meta()
             meta.mark_sensor(cal)
-            self._state.__dict__["_survey_metadata"]   = meta
+            self._state.__dict__["_survey_metadata"] = meta
             self._state.__dict__["_sensor_calibration"] = cal
-            # Persist to calibration_state and fire calibration_changed signal
-            self._state.set_calibration(meta.calibration.to_dict())
-            print(f"\n[CALIBRATION] Sensor: ADC={cal.adc_scaling_factor} "
-                  f"Gain={cal.gain} Offset={cal.offset} "
-                  f"Spacing={cal.sensor_spacing_m}m")
+            # FIX 11: push through the setter so calibration_changed fires and
+            # StatusBar / pipeline actually see the calibration.
+            self._state.set_calibration({**self._state.calibration_state, "sensor": cal.__dict__})
             QMessageBox.information(self._w, "GMS — Sensor Calibration Applied",
-                f"ADC Scale: {cal.adc_scaling_factor}\n"
-                f"Gain: {cal.gain}  Offset: {cal.offset}\n"
+                f"ADC Scale: {cal.adc_scaling_factor}
+"
+                f"Gain: {cal.gain}  Offset: {cal.offset}
+"
                 f"Sensor Spacing: {cal.sensor_spacing_m} m")
         except ValueError as e:
             QMessageBox.warning(self._w, "GMS — Sensor Error", str(e))
         except Exception as e:
             logger.error(f"[SurveyCtrl] Sensor: {e}", exc_info=True)
-
+   
     def _on_apply_soil(self):
         from core.geometry import SoilCalibration
         try:
-            cmb     = _w(self._w, QComboBox, "cmbSoilProf")
+            cmb = _w(self._w, QComboBox, "cmbSoilProf")
             profile = cmb.currentText() if cmb else "General Loam"
             cal = SoilCalibration(
-                soil_profile              =profile,
-                mineralization_correction =_spin(self._w, "spinMineral", 0.0),
-                basalt_compensation       =_spin(self._w, "spinBasalt",  0.0),
+                soil_profile=profile,
+                mineralization_correction=_spin(self._w, "spinMineral", 0.0),
+                basalt_compensation=_spin(self._w, "spinBasalt", 0.0),
             )
             cal.validate()
             meta = self._get_meta()
             meta.mark_soil(cal)
-            self._state.__dict__["_survey_metadata"]  = meta
+            self._state.__dict__["_survey_metadata"] = meta
             self._state.__dict__["_soil_calibration"] = cal
-            # Persist to calibration_state and fire calibration_changed signal
-            self._state.set_calibration(meta.calibration.to_dict())
-            print(f"\n[CALIBRATION] Soil: Profile={cal.soil_profile} "
-                  f"Mineral={cal.mineralization_correction} "
-                  f"Basalt={cal.basalt_compensation}")
+            # FIX 11: fire calibration_changed
+            self._state.set_calibration({**self._state.calibration_state, "soil": cal.__dict__})
             QMessageBox.information(self._w, "GMS — Soil Calibration Applied",
-                f"Profile: {cal.soil_profile}\n"
-                f"Mineralization: {cal.mineralization_correction}%\n"
+                f"Profile: {cal.soil_profile}
+"
+                f"Mineralization: {cal.mineralization_correction}%
+"
                 f"Basalt: {cal.basalt_compensation}%")
         except ValueError as e:
             QMessageBox.warning(self._w, "GMS — Soil Error", str(e))
         except Exception as e:
             logger.error(f"[SurveyCtrl] Soil: {e}", exc_info=True)
-
     def validate_pipeline_ready(self) -> bool:
         try:
             self._get_meta().validate_pipeline_ready()
@@ -211,3 +210,11 @@ class SurveyController(QObject):
 
     def get_survey_metadata(self):
         return self._get_meta()
+        
+"""
+#FIX 12 wiring (not in this file): validate_pipeline_ready() already exists and is correct, it's just never called. Wherever the Run button triggers #PipelineExecutionController.run(...) (the main controller / integration patch), gate it:
+survey = controllers.get("survey")
+if survey is not None and not survey.validate_pipeline_ready():
+    return  # QMessageBox already shown
+# ... proceed to exec_c.run(...)
+"""
